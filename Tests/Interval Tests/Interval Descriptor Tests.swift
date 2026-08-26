@@ -1,7 +1,7 @@
-import Interval_Primitives_Test_Support
+import Interval_Test_Support
 import Testing
 
-@testable import Interval_Primitives
+@testable import Interval
 
 @Suite
 struct `Interval Bound` {

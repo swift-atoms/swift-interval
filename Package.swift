@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-interval-primitives",
+    name: "swift-interval",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -19,31 +19,31 @@ let package = Package(
         ),
 
         .library(
-            name: "Interval Bound Primitives",
-            targets: ["Interval Bound Primitives"]
+            name: "Interval Bound",
+            targets: ["Interval Bound"]
         ),
         .library(
-            name: "Interval Boundary Primitives",
-            targets: ["Interval Boundary Primitives"]
+            name: "Interval Boundary",
+            targets: ["Interval Boundary"]
         ),
         .library(
-            name: "Interval Endpoint Primitives",
-            targets: ["Interval Endpoint Primitives"]
-        ),
-
-        .library(
-            name: "Interval Primitives",
-            targets: ["Interval Primitives"]
+            name: "Interval Endpoint",
+            targets: ["Interval Endpoint"]
         ),
 
         .library(
-            name: "Interval Primitives Test Support",
-            targets: ["Interval Primitives Test Support"]
+            name: "Interval",
+            targets: ["Interval"]
+        ),
+
+        .library(
+            name: "Interval Test Support",
+            targets: ["Interval Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-pair-primitives.git",
+            url: "https://github.com/swift-molecules/swift-pair.git",
             branch: "main"
         )
     ],
@@ -55,51 +55,51 @@ let package = Package(
         ),
 
         .target(
-            name: "Interval Bound Primitives",
+            name: "Interval Bound",
             dependencies: [
                 "Interval Primitive",
-                .product(name: "Pair Primitives", package: "swift-pair-primitives"),
+                .product(name: "Pair", package: "swift-pair"),
             ]
         ),
         .target(
-            name: "Interval Boundary Primitives",
+            name: "Interval Boundary",
             dependencies: [
                 "Interval Primitive",
-                .product(name: "Pair Primitives", package: "swift-pair-primitives"),
+                .product(name: "Pair", package: "swift-pair"),
             ]
         ),
         .target(
-            name: "Interval Endpoint Primitives",
+            name: "Interval Endpoint",
             dependencies: [
                 "Interval Primitive",
-                .product(name: "Pair Primitives", package: "swift-pair-primitives"),
-            ]
-        ),
-
-        .target(
-            name: "Interval Primitives",
-            dependencies: [
-                "Interval Primitive",
-                "Interval Bound Primitives",
-                "Interval Boundary Primitives",
-                "Interval Endpoint Primitives",
-                .product(name: "Pair Primitives", package: "swift-pair-primitives"),
+                .product(name: "Pair", package: "swift-pair"),
             ]
         ),
 
         .target(
-            name: "Interval Primitives Test Support",
+            name: "Interval",
             dependencies: [
-                "Interval Primitives"
+                "Interval Primitive",
+                "Interval Bound",
+                "Interval Boundary",
+                "Interval Endpoint",
+                .product(name: "Pair", package: "swift-pair"),
+            ]
+        ),
+
+        .target(
+            name: "Interval Test Support",
+            dependencies: [
+                "Interval"
             ],
             path: "Tests/Support"
         ),
 
         .testTarget(
-            name: "Interval Primitives Tests",
+            name: "Interval Tests",
             dependencies: [
-                "Interval Primitives",
-                "Interval Primitives Test Support",
+                "Interval",
+                "Interval Test Support",
             ]
         ),
     ],

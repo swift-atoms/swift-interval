@@ -1,5 +1,5 @@
 public import Interval_Primitive
-public import Pair_Primitives
+public import Pair
 
 extension Interval {
 
