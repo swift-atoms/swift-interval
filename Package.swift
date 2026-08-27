@@ -12,95 +12,39 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Interval Primitive",
-            targets: ["Interval Primitive"]
-        ),
-
-        .library(
-            name: "Interval Bound",
-            targets: ["Interval Bound"]
-        ),
-        .library(
-            name: "Interval Boundary",
-            targets: ["Interval Boundary"]
-        ),
-        .library(
-            name: "Interval Endpoint",
-            targets: ["Interval Endpoint"]
-        ),
-
         .library(
             name: "Interval",
             targets: ["Interval"]
         ),
-
         .library(
-            name: "Interval Test Support",
-            targets: ["Interval Test Support"]
+            name: "Interval Standard Library Integration",
+            targets: ["Interval Standard Library Integration"]
+        ),
+        .library(
+            name: "Interval Apple Foundation Integration",
+            targets: ["Interval Apple Foundation Integration"]
         ),
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/swift-molecules/swift-pair.git",
-            branch: "main"
-        )
-    ],
+    dependencies: [],
     targets: [
-
-        .target(
-            name: "Interval Primitive",
-            dependencies: []
-        ),
-
-        .target(
-            name: "Interval Bound",
-            dependencies: [
-                "Interval Primitive",
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Interval Boundary",
-            dependencies: [
-                "Interval Primitive",
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Interval Endpoint",
-            dependencies: [
-                "Interval Primitive",
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-
         .target(
             name: "Interval",
-            dependencies: [
-                "Interval Primitive",
-                "Interval Bound",
-                "Interval Boundary",
-                "Interval Endpoint",
-                .product(name: "Pair", package: "swift-pair"),
-            ]
+            dependencies: []
         ),
-
         .target(
-            name: "Interval Test Support",
-            dependencies: [
-                "Interval"
-            ],
-            path: "Tests/Support"
+            name: "Interval Standard Library Integration",
+            dependencies: ["Interval"]
         ),
-
-        .testTarget(
-            name: "Interval Tests",
+        .target(
+            name: "Interval Apple Foundation Integration",
             dependencies: [
                 "Interval",
-                "Interval Test Support",
+                "Interval Standard Library Integration",
             ]
+        ),
+        .testTarget(
+            name: "Interval Tests",
+            dependencies: ["Interval"]
         ),
     ],
     swiftLanguageModes: [.v6]

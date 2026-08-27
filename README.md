@@ -32,16 +32,7 @@ print(position.opposite)   // end
 
 Each descriptor reads in the vocabulary of its caller. `Interval.Bound` aliases `.lower`/`.upper` as `.min`/`.max` and `.left`/`.right`; `Interval.Endpoint` aliases `.start`/`.end` as `.first`/`.last` and `.head`/`.tail`. The underlying case is one value, so a `.min` produced in one module compares equal to a `.lower` consumed in another.
 
-To carry a payload alongside a descriptor, each type exposes a `Value<Payload>` typealias — a `Pair` of the descriptor and the payload:
-
-```swift
-import Interval
-import Pair
-
-// Tag a number with the bound it represents.
-let labelled: Interval.Bound.Value<Int> = Pair(.lower, 0)
-print(labelled.first, labelled.second)   // lower 0
-```
+To carry a payload alongside a descriptor, the `Interval Pair` product of the companion `swift-interval-pair` package pairs a descriptor with a payload via each type's `Value<Payload>` typealias.
 
 All three descriptors are `Sendable`, `Hashable`, `CaseIterable`, and (outside Embedded) `Codable`.
 
@@ -70,16 +61,13 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 
 
 ## Architecture
 
-The `Interval Primitive` target is the dependency-free namespace root; each descriptor lives in its own sub-namespace target so a consumer imports only what it uses. The `Interval` umbrella re-exports all of them. The `Value<Payload>` typealiases depend on the `Pair` primitive.
+The `Interval` target owns the whole descriptor vocabulary and has zero dependencies. Standard-library conformances beyond the core live in `Interval Standard Library Integration`; `Interval Apple Foundation Integration` is the only module that may import Foundation. Integration with `Pair` lives in the separate `swift-interval-pair` package.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Interval Primitive` | `Sources/Interval Primitive/` | The `Interval` namespace root. Zero external dependencies. |
-| `Interval Bound` | `Sources/Interval Bound/` | `Interval.Bound` — lower/upper endpoint position, with `.opposite`, aliases (`min`/`max`, `left`/`right`), and `Value<Payload>`. |
-| `Interval Boundary` | `Sources/Interval Boundary/` | `Interval.Boundary` — closed/open inclusivity, with `isInclusive`/`isExclusive`, `toggled`, and `Value<Payload>`. |
-| `Interval Endpoint` | `Sources/Interval Endpoint/` | `Interval.Endpoint` — start/end sequence position, with `.opposite`, aliases (`first`/`last`, `head`/`tail`), and `Value<Payload>`. |
-| `Interval` | `Sources/Interval/` | Umbrella re-exporting the namespace and all three descriptor sub-namespaces. |
-| `Interval Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
+| `Interval` | `Sources/Interval/` | The `Interval` namespace and the `Bound`, `Boundary`, and `Endpoint` descriptors. Zero dependencies. |
+| `Interval Standard Library Integration` | `Sources/Interval Standard Library Integration/` | `Codable` conformances for the three descriptors. |
+| `Interval Apple Foundation Integration` | `Sources/Interval Apple Foundation Integration/` | Foundation-facing surface; the only module allowed to import Foundation. |
 
 Foundation-free.
 

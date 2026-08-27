@@ -1,4 +1,3 @@
-import Interval_Test_Support
 import Testing
 
 @testable import Interval
