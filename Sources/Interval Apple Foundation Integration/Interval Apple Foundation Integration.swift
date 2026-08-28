@@ -1,3 +1,0 @@
-public import Interval
-public import Interval_Standard_Library_Integration
-public import Foundation
