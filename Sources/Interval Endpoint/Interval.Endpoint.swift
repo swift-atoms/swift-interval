@@ -1,7 +1,7 @@
-public import Interval_Primitive
+public import Interval
 public import Pair
 
-extension Interval {
+extension Interval::Interval {
 
     public enum Endpoint: Sendable, Hashable, CaseIterable {
 
@@ -11,10 +11,12 @@ extension Interval {
     }
 }
 
-extension Interval.Endpoint {
+extension Interval::Interval.Endpoint {
 
     @inlinable
-    public static func opposite(of endpoint: Interval.Endpoint) -> Interval.Endpoint {
+    public static func opposite(
+        of endpoint: Interval::Interval.Endpoint
+    ) -> Interval::Interval.Endpoint {
         switch endpoint {
         case .start: return .end
         case .end: return .start
@@ -22,32 +24,32 @@ extension Interval.Endpoint {
     }
 
     @inlinable
-    public var opposite: Interval.Endpoint {
+    public var opposite: Interval::Interval.Endpoint {
         Self.opposite(of: self)
     }
 
     @inlinable
-    public static prefix func ! (value: Interval.Endpoint) -> Interval.Endpoint {
+    public static prefix func ! (value: Interval::Interval.Endpoint) -> Interval::Interval.Endpoint {
         value.opposite
     }
 }
 
-extension Interval.Endpoint {
+extension Interval::Interval.Endpoint {
 
-    public static var first: Interval.Endpoint { .start }
+    public static var first: Interval::Interval.Endpoint { .start }
 
-    public static var last: Interval.Endpoint { .end }
+    public static var last: Interval::Interval.Endpoint { .end }
 
-    public static var head: Interval.Endpoint { .start }
+    public static var head: Interval::Interval.Endpoint { .start }
 
-    public static var tail: Interval.Endpoint { .end }
+    public static var tail: Interval::Interval.Endpoint { .end }
 }
 
-extension Interval.Endpoint {
+extension Interval::Interval.Endpoint {
 
-    public typealias Value<Payload> = Pair<Interval.Endpoint, Payload>
+    public typealias Value<Payload> = Pair<Interval::Interval.Endpoint, Payload>
 }
 
 #if !hasFeature(Embedded)
-    extension Interval.Endpoint: Codable {}
+    extension Interval::Interval.Endpoint: Codable {}
 #endif

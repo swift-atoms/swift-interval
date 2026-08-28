@@ -1,7 +1,7 @@
-public import Interval_Primitive
+public import Interval
 public import Pair
 
-extension Interval {
+extension Interval::Interval {
 
     public enum Bound: Sendable, Hashable, CaseIterable {
 
@@ -11,10 +11,10 @@ extension Interval {
     }
 }
 
-extension Interval.Bound {
+extension Interval::Interval.Bound {
 
     @inlinable
-    public static func opposite(of bound: Interval.Bound) -> Interval.Bound {
+    public static func opposite(of bound: Interval::Interval.Bound) -> Interval::Interval.Bound {
         switch bound {
         case .lower: return .upper
         case .upper: return .lower
@@ -22,32 +22,32 @@ extension Interval.Bound {
     }
 
     @inlinable
-    public var opposite: Interval.Bound {
+    public var opposite: Interval::Interval.Bound {
         Self.opposite(of: self)
     }
 
     @inlinable
-    public static prefix func ! (value: Interval.Bound) -> Interval.Bound {
+    public static prefix func ! (value: Interval::Interval.Bound) -> Interval::Interval.Bound {
         value.opposite
     }
 }
 
-extension Interval.Bound {
+extension Interval::Interval.Bound {
 
-    public static var min: Interval.Bound { .lower }
+    public static var min: Interval::Interval.Bound { .lower }
 
-    public static var max: Interval.Bound { .upper }
+    public static var max: Interval::Interval.Bound { .upper }
 
-    public static var left: Interval.Bound { .lower }
+    public static var left: Interval::Interval.Bound { .lower }
 
-    public static var right: Interval.Bound { .upper }
+    public static var right: Interval::Interval.Bound { .upper }
 }
 
-extension Interval.Bound {
+extension Interval::Interval.Bound {
 
-    public typealias Value<Payload> = Pair<Interval.Bound, Payload>
+    public typealias Value<Payload> = Pair<Interval::Interval.Bound, Payload>
 }
 
 #if !hasFeature(Embedded)
-    extension Interval.Bound: Codable {}
+    extension Interval::Interval.Bound: Codable {}
 #endif

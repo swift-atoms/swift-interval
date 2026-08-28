@@ -14,8 +14,8 @@ let package = Package(
     products: [
 
         .library(
-            name: "Interval Primitive",
-            targets: ["Interval Primitive"]
+            name: "Interval",
+            targets: ["Interval"]
         ),
 
         .library(
@@ -31,75 +31,64 @@ let package = Package(
             targets: ["Interval Endpoint"]
         ),
 
-        .library(
-            name: "Interval",
-            targets: ["Interval"]
-        ),
-
-        .library(
-            name: "Interval Test Support",
-            targets: ["Interval Test Support"]
-        ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-pair.git",
+            url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         )
     ],
     targets: [
 
         .target(
-            name: "Interval Primitive",
+            name: "Interval",
             dependencies: []
         ),
 
         .target(
             name: "Interval Bound",
             dependencies: [
-                "Interval Primitive",
+                .target(name: "Interval"),
                 .product(name: "Pair", package: "swift-pair"),
             ]
         ),
         .target(
             name: "Interval Boundary",
             dependencies: [
-                "Interval Primitive",
+                .target(name: "Interval"),
                 .product(name: "Pair", package: "swift-pair"),
             ]
         ),
         .target(
             name: "Interval Endpoint",
             dependencies: [
-                "Interval Primitive",
+                .target(name: "Interval"),
                 .product(name: "Pair", package: "swift-pair"),
             ]
-        ),
-
-        .target(
-            name: "Interval",
-            dependencies: [
-                "Interval Primitive",
-                "Interval Bound",
-                "Interval Boundary",
-                "Interval Endpoint",
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-
-        .target(
-            name: "Interval Test Support",
-            dependencies: [
-                "Interval"
-            ],
-            path: "Tests/Support"
         ),
 
         .testTarget(
             name: "Interval Tests",
             dependencies: [
-                "Interval",
-                "Interval Test Support",
+                .target(name: "Interval"),
+            ]
+        ),
+        .testTarget(
+            name: "Interval Bound Tests",
+            dependencies: [
+                .target(name: "Interval Bound"),
+            ]
+        ),
+        .testTarget(
+            name: "Interval Boundary Tests",
+            dependencies: [
+                .target(name: "Interval Boundary"),
+            ]
+        ),
+        .testTarget(
+            name: "Interval Endpoint Tests",
+            dependencies: [
+                .target(name: "Interval Endpoint"),
             ]
         ),
     ],
