@@ -30,6 +30,10 @@ let package = Package(
             name: "Interval Endpoint",
             targets: ["Interval Endpoint"]
         ),
+        .library(
+            name: "Interval Unit",
+            targets: ["Interval Unit"]
+        ),
 
     ],
     dependencies: [
@@ -66,6 +70,12 @@ let package = Package(
                 .product(name: "Pair", package: "swift-pair"),
             ]
         ),
+        .target(
+            name: "Interval Unit",
+            dependencies: [
+                .target(name: "Interval"),
+            ]
+        ),
 
         .testTarget(
             name: "Interval Tests",
@@ -89,6 +99,12 @@ let package = Package(
             name: "Interval Endpoint Tests",
             dependencies: [
                 .target(name: "Interval Endpoint"),
+            ]
+        ),
+        .testTarget(
+            name: "Interval Unit Tests",
+            dependencies: [
+                .target(name: "Interval Unit"),
             ]
         ),
     ],

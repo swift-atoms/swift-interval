@@ -82,6 +82,7 @@ The `Interval` target is the dependency-free namespace root; each descriptor liv
 | `Interval Bound` | `Sources/Interval Bound/` | `Interval.Bound` — lower/upper endpoint position, with `.opposite`, aliases (`min`/`max`, `left`/`right`), and `Value<Payload>`. |
 | `Interval Boundary` | `Sources/Interval Boundary/` | `Interval.Boundary` — closed/open inclusivity, with `isInclusive`/`isExclusive`, `toggled`, and `Value<Payload>`. |
 | `Interval Endpoint` | `Sources/Interval Endpoint/` | `Interval.Endpoint` — start/end sequence position, with `.opposite`, aliases (`first`/`last`, `head`/`tail`), and `Value<Payload>`. |
+| `Interval Unit` | `Sources/Interval Unit/` | `Interval.Unit<Scalar>` — a scalar confined to `[0, 1]`, with checked/clamping initialization, complement, interpolation, multiplication, and the `Opacity` / `Alpha` aliases. |
 
 Foundation-free.
 
