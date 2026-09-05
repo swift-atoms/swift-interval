@@ -1,7 +1,7 @@
-public import Advancement
-public import Cardinal
-public import Carrier_Protocol
-public import Distance
+internal import Advancement
+internal import Cardinal
+internal import Carrier_Protocol
+internal import Distance
 public import Ordinal
 
 extension Interval {
