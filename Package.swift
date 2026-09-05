@@ -12,99 +12,57 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Interval",
-            targets: ["Interval"]
-        ),
-
-        .library(
-            name: "Interval Bound",
-            targets: ["Interval Bound"]
-        ),
-        .library(
-            name: "Interval Boundary",
-            targets: ["Interval Boundary"]
-        ),
-        .library(
-            name: "Interval Endpoint",
-            targets: ["Interval Endpoint"]
-        ),
-        .library(
-            name: "Interval Unit",
-            targets: ["Interval Unit"]
-        ),
-
+        .library(name: "Interval", targets: ["Interval"]),
     ],
     dependencies: [
         .package(
+            url: "https://github.com/swift-atoms/swift-advancement.git",
+            branch: "main"
+        ),
+        .package(
             url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
-        )
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-difference.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-distance.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-tagged.git",
+            branch: "main"
+        ),
     ],
     targets: [
-
         .target(
             name: "Interval",
-            dependencies: []
-        ),
-
-        .target(
-            name: "Interval Bound",
             dependencies: [
-                .target(name: "Interval"),
+                .product(name: "Advancement", package: "swift-advancement"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Distance", package: "swift-distance"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Pair", package: "swift-pair"),
             ]
         ),
-        .target(
-            name: "Interval Boundary",
-            dependencies: [
-                .target(name: "Interval"),
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Interval Endpoint",
-            dependencies: [
-                .target(name: "Interval"),
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Interval Unit",
-            dependencies: [
-                .target(name: "Interval"),
-            ]
-        ),
-
         .testTarget(
             name: "Interval Tests",
             dependencies: [
                 .target(name: "Interval"),
-            ]
-        ),
-        .testTarget(
-            name: "Interval Bound Tests",
-            dependencies: [
-                .target(name: "Interval Bound"),
-            ]
-        ),
-        .testTarget(
-            name: "Interval Boundary Tests",
-            dependencies: [
-                .target(name: "Interval Boundary"),
-            ]
-        ),
-        .testTarget(
-            name: "Interval Endpoint Tests",
-            dependencies: [
-                .target(name: "Interval Endpoint"),
-            ]
-        ),
-        .testTarget(
-            name: "Interval Unit Tests",
-            dependencies: [
-                .target(name: "Interval Unit"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Difference", package: "swift-difference"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
     ],

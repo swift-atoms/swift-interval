@@ -1,6 +1,6 @@
 import Testing
 
-@testable import Interval_Unit
+@testable import Interval
 
 @Suite
 struct `Interval Unit - Initialization` {

@@ -1,10 +1,10 @@
-import Interval_Boundary
+import Interval
 import Testing
 
 @Suite
 struct `Interval Boundary Tests` {
     @Test
     func `boundary toggles inclusion`() {
-        #expect(Interval::Interval.Boundary.closed.toggled == .open)
+        #expect(Interval.Boundary.closed.toggled == .open)
     }
 }

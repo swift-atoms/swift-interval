@@ -5,6 +5,6 @@ import Testing
 struct `Interval Tests` {
     @Test
     func `interval namespace is empty`() {
-        #expect(MemoryLayout<Interval::Interval>.size == 0)
+        #expect(MemoryLayout<Interval>.size == 0)
     }
 }

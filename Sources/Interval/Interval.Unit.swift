@@ -1,6 +1,5 @@
-public import Interval
 
-extension Interval::Interval {
+extension Interval {
 
     public struct Unit<Scalar: BinaryFloatingPoint> {
 
@@ -33,15 +32,15 @@ extension Interval::Interval {
     }
 }
 
-extension Interval::Interval.Unit {
+extension Interval.Unit {
 
     @inlinable
     public var underlying: Scalar { _storage }
 }
 
-extension Interval::Interval.Unit: Sendable where Scalar: Sendable {}
+extension Interval.Unit: Sendable where Scalar: Sendable {}
 
-extension Interval::Interval.Unit: Equatable {
+extension Interval.Unit: Equatable {
 
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -49,7 +48,7 @@ extension Interval::Interval.Unit: Equatable {
     }
 }
 
-extension Interval::Interval.Unit: Hashable {
+extension Interval.Unit: Hashable {
 
     @inlinable
     public func hash(into hasher: inout Hasher) {
@@ -57,7 +56,7 @@ extension Interval::Interval.Unit: Hashable {
     }
 }
 
-extension Interval::Interval.Unit: Comparable {
+extension Interval.Unit: Comparable {
 
     @inlinable
     public static func < (lhs: Self, rhs: Self) -> Bool {
@@ -65,7 +64,7 @@ extension Interval::Interval.Unit: Comparable {
     }
 }
 
-extension Interval::Interval.Unit {
+extension Interval.Unit {
 
     @inlinable
     public static var zero: Self { Self(_unchecked: (), 0) }
@@ -77,7 +76,7 @@ extension Interval::Interval.Unit {
     public static var half: Self { Self(_unchecked: (), Scalar(0.5)) }
 }
 
-extension Interval::Interval.Unit {
+extension Interval.Unit {
 
     @inlinable
     public var complement: Self {
@@ -93,7 +92,7 @@ extension Interval::Interval.Unit {
     }
 }
 
-extension Interval::Interval.Unit {
+extension Interval.Unit {
 
     @inlinable
     public static func * (lhs: Self, rhs: Self) -> Self {
@@ -107,7 +106,7 @@ extension Interval::Interval.Unit {
     }
 }
 
-extension Interval::Interval.Unit: ExpressibleByFloatLiteral
+extension Interval.Unit: ExpressibleByFloatLiteral
 where Scalar: ExpressibleByFloatLiteral {
 
     public typealias FloatLiteralType = Scalar.FloatLiteralType
@@ -124,7 +123,7 @@ where Scalar: ExpressibleByFloatLiteral {
     }
 }
 
-extension Interval::Interval.Unit: ExpressibleByIntegerLiteral
+extension Interval.Unit: ExpressibleByIntegerLiteral
 where Scalar: ExpressibleByIntegerLiteral {
 
     public typealias IntegerLiteralType = Scalar.IntegerLiteralType
@@ -142,7 +141,7 @@ where Scalar: ExpressibleByIntegerLiteral {
 }
 
 #if !hasFeature(Embedded)
-    extension Interval::Interval.Unit: Codable where Scalar: Codable {
+    extension Interval.Unit: Codable where Scalar: Codable {
 
         public init(from decoder: any Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -166,6 +165,6 @@ where Scalar: ExpressibleByIntegerLiteral {
     }
 #endif
 
-public typealias Opacity<Scalar: BinaryFloatingPoint> = Interval::Interval.Unit<Scalar>
+public typealias Opacity<Scalar: BinaryFloatingPoint> = Interval.Unit<Scalar>
 
 public typealias Alpha<Scalar: BinaryFloatingPoint> = Opacity<Scalar>

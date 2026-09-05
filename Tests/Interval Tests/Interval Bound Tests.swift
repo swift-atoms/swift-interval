@@ -1,10 +1,10 @@
-import Interval_Bound
+import Interval
 import Testing
 
 @Suite
 struct `Interval Bound Tests` {
     @Test
     func `bounds are opposites`() {
-        #expect(Interval::Interval.Bound.lower.opposite == .upper)
+        #expect(Interval.Bound.lower.opposite == .upper)
     }
 }

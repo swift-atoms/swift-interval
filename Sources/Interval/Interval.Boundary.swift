@@ -1,7 +1,6 @@
-public import Interval
 public import Pair
 
-extension Interval::Interval {
+extension Interval {
 
     public enum Boundary: Sendable, Hashable, CaseIterable {
 
@@ -11,12 +10,12 @@ extension Interval::Interval {
     }
 }
 
-extension Interval::Interval.Boundary {
+extension Interval.Boundary {
 
     @inlinable
     public static func opposite(
-        of boundary: Interval::Interval.Boundary
-    ) -> Interval::Interval.Boundary {
+        of boundary: Interval.Boundary
+    ) -> Interval.Boundary {
         switch boundary {
         case .closed: return .open
         case .open: return .closed
@@ -24,12 +23,12 @@ extension Interval::Interval.Boundary {
     }
 
     @inlinable
-    public var opposite: Interval::Interval.Boundary {
+    public var opposite: Interval.Boundary {
         Self.opposite(of: self)
     }
 
     @inlinable
-    public static prefix func ! (value: Interval::Interval.Boundary) -> Interval::Interval.Boundary {
+    public static prefix func ! (value: Interval.Boundary) -> Interval.Boundary {
         value.opposite
     }
 
@@ -37,7 +36,7 @@ extension Interval::Interval.Boundary {
     public var toggled: Interval.Boundary { opposite }
 }
 
-extension Interval::Interval.Boundary {
+extension Interval.Boundary {
 
     @inlinable
     public var isInclusive: Bool { self == .closed }
@@ -46,11 +45,11 @@ extension Interval::Interval.Boundary {
     public var isExclusive: Bool { self == .open }
 }
 
-extension Interval::Interval.Boundary {
+extension Interval.Boundary {
 
-    public typealias Value<Payload> = Pair<Interval::Interval.Boundary, Payload>
+    public typealias Value<Payload> = Pair<Interval.Boundary, Payload>
 }
 
 #if !hasFeature(Embedded)
-    extension Interval::Interval.Boundary: Codable {}
+    extension Interval.Boundary: Codable {}
 #endif
