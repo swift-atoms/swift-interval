@@ -6,7 +6,7 @@ public import Ordinal
 
 extension Swift.Range where Bound: Ordinal.`Protocol` {
 
-    /// Creates a range when `Bound`'s `Comparable` order agrees with its ordinal order.
+
     public init(_ interval: Interval.Discrete<Bound>) {
         precondition(
             interval.start <= interval.end,

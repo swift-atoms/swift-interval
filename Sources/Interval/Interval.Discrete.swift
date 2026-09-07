@@ -6,15 +6,15 @@ public import Ordinal
 
 extension Interval {
 
-    /// A finite, half-open sequence of consecutive positions.
+
     public struct Discrete<Position: Ordinal.`Protocol`> {
 
         public let start: Position
 
-        /// The exclusive endpoint.
+
         public let end: Position
 
-        /// The number of positions, carrying the position's domain.
+
         public var count: Position.Count {
             Position.Count(
                 Cardinal(
@@ -99,15 +99,15 @@ extension Interval.Discrete: Swift.Sendable where Position: Swift.Sendable {}
 
 extension Interval.Discrete where Position: Comparable {
 
-    /// Creates an interval from a range whose `Comparable` order agrees with
-    /// the position's ordinal order.
+
+
     public init(_ range: Swift.Range<Position>) throws(Error) {
         try self.init(start: range.lowerBound, end: range.upperBound)
     }
 
-    /// Returns the equivalent range.
-    ///
-    /// `Position` must order values in the same direction as `ordinal`.
+
+
+
     public var range: Swift.Range<Position> {
         precondition(
             start <= end,
