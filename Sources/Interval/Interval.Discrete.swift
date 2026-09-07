@@ -1,6 +1,6 @@
 internal import Advancement
 internal import Cardinal
-internal import Carrier_Protocol
+internal import Carrier
 internal import Distance
 public import Ordinal
 
