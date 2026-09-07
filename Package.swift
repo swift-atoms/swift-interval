@@ -13,6 +13,9 @@ let package = Package(
     ],
     products: [
         .library(name: "Interval", targets: ["Interval"]),
+        .library(name: "Interval Standard Library Integration", targets: ["Interval Standard Library Integration"]),
+        .library(name: "Interval Foundation Library Integration", targets: ["Interval Foundation Library Integration"]),
+        .library(name: "Interval Test Support", targets: ["Interval Test Support"]),
     ],
     dependencies: [
         .package(
@@ -53,7 +56,30 @@ let package = Package(
                 .product(name: "Distance", package: "swift-distance"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Pair", package: "swift-pair"),
-            ]
+            ],
+            path: "Sources/Interval"
+        ),
+        .target(
+            name: "Interval Standard Library Integration",
+            dependencies: [
+                .target(name: "Interval"),
+            ],
+            path: "Sources/Interval Standard Library Integration"
+        ),
+        .target(
+            name: "Interval Foundation Library Integration",
+            dependencies: [
+                .target(name: "Interval"),
+                .target(name: "Interval Standard Library Integration"),
+            ],
+            path: "Sources/Interval Foundation Library Integration"
+        ),
+        .target(
+            name: "Interval Test Support",
+            dependencies: [
+                .target(name: "Interval"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Interval Tests",
@@ -63,14 +89,18 @@ let package = Package(
                 .product(name: "Difference", package: "swift-difference"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
-            ]
+                .target(name: "Interval Test Support"),
+                .target(name: "Interval Standard Library Integration"),
+                .target(name: "Interval Foundation Library Integration"),
+            ],
+            path: "Tests/Interval Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -79,8 +109,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
