@@ -1,5 +1,3 @@
-public import Pair
-
 extension Interval {
 
     public enum Boundary: Sendable, Hashable, CaseIterable {
@@ -43,11 +41,6 @@ extension Interval.Boundary {
 
     @inlinable
     public var isExclusive: Bool { self == .open }
-}
-
-extension Interval.Boundary {
-
-    public typealias Value<Payload> = Pair<Interval.Boundary, Payload>
 }
 
 #if !hasFeature(Embedded)

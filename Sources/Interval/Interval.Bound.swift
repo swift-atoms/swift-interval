@@ -1,5 +1,3 @@
-public import Pair
-
 extension Interval {
 
     public enum Bound: Sendable, Hashable, CaseIterable {
@@ -40,11 +38,6 @@ extension Interval.Bound {
     public static var left: Interval.Bound { .lower }
 
     public static var right: Interval.Bound { .upper }
-}
-
-extension Interval.Bound {
-
-    public typealias Value<Payload> = Pair<Interval.Bound, Payload>
 }
 
 #if !hasFeature(Embedded)

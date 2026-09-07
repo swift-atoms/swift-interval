@@ -23,10 +23,6 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-pair.git",
-            branch: "main"
-        ),
-        .package(
             url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
@@ -55,7 +51,6 @@ let package = Package(
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Distance", package: "swift-distance"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Pair", package: "swift-pair"),
             ],
             path: "Sources/Interval"
         ),
