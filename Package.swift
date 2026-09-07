@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Interval", targets: ["Interval"]),
-        .library(name: "Interval Standard Library Integration", targets: ["Interval Standard Library Integration"]),
-        .library(name: "Interval Foundation Library Integration", targets: ["Interval Foundation Library Integration"]),
+
+        .library(name: "Interval Foundation Integration", targets: ["Interval Foundation Integration"]),
         .library(name: "Interval Test Support", targets: ["Interval Test Support"]),
     ],
     dependencies: [
@@ -59,20 +59,13 @@ let package = Package(
             ],
             path: "Sources/Interval"
         ),
+        
         .target(
-            name: "Interval Standard Library Integration",
+            name: "Interval Foundation Integration",
             dependencies: [
                 .target(name: "Interval"),
             ],
-            path: "Sources/Interval Standard Library Integration"
-        ),
-        .target(
-            name: "Interval Foundation Library Integration",
-            dependencies: [
-                .target(name: "Interval"),
-                .target(name: "Interval Standard Library Integration"),
-            ],
-            path: "Sources/Interval Foundation Library Integration"
+            path: "Sources/Interval Foundation Integration"
         ),
         .target(
             name: "Interval Test Support",
@@ -90,8 +83,7 @@ let package = Package(
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .target(name: "Interval Test Support"),
-                .target(name: "Interval Standard Library Integration"),
-                .target(name: "Interval Foundation Library Integration"),
+                .target(name: "Interval Foundation Integration"),
             ],
             path: "Tests/Interval Tests"
         ),

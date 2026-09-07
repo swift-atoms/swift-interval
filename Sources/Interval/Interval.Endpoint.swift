@@ -50,5 +50,5 @@ extension Interval.Endpoint {
 }
 
 #if !hasFeature(Embedded)
-    extension Interval.Endpoint: Codable {}
+extension Interval.Endpoint: Swift.Codable {}
 #endif
