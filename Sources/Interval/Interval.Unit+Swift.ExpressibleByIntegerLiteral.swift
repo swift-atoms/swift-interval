@@ -6,11 +6,11 @@ where Scalar: Swift.ExpressibleByIntegerLiteral {
     @inlinable
     public init(integerLiteral value: IntegerLiteralType) {
         let scalar = Scalar(integerLiteral: value)
-        assert(
+        precondition(
             scalar >= 0 && scalar <= 1,
             "Integer literal must be 0 or 1"
         )
 
-        self._storage = min(max(scalar, 0), 1)
+        self._storage = scalar
     }
 }

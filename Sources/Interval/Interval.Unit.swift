@@ -15,8 +15,8 @@ extension Interval {
             _unchecked: Void,
             _ value: Scalar
         ) {
-            assert(value.isFinite, "Interval.Unit requires finite values")
-            assert(value >= 0 && value <= 1, "Interval.Unit requires value in [0, 1]")
+            precondition(value.isFinite, "Interval.Unit requires finite values")
+            precondition(value >= 0 && value <= 1, "Interval.Unit requires value in [0, 1]")
             self._storage = value
         }
 

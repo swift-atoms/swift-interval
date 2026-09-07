@@ -3,7 +3,7 @@ import Testing
 @testable import Interval
 
 @Suite
-struct `Interval Unit - Initialization` {
+struct `Unit interval initialization distinguishes acceptance from clamping` {
 
     @Test
     func `checked init accepts values in the unit interval`() {
@@ -35,10 +35,10 @@ struct `Interval Unit - Initialization` {
 }
 
 @Suite
-struct `Interval Unit - Operations` {
+struct `Unit interval operations preserve bounded values` {
 
     @Test
-    func `complement is an involution`() {
+    func `complement recovers the exactly representable quarter`() {
         let value: Interval.Unit<Double> = 0.25
         #expect(value.complement.underlying == 0.75)
         #expect(value.complement.complement == value)
@@ -77,7 +77,7 @@ struct `Interval Unit - Operations` {
 }
 
 @Suite
-struct `Interval Unit - Aliases` {
+struct `Graphics aliases reuse the unit interval` {
 
     @Test
     func `Opacity and Alpha alias the unit interval`() {
