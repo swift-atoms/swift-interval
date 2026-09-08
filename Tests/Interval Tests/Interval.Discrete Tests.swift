@@ -36,7 +36,7 @@ private struct EncodedEndpoints: Encodable {
 }
 
 @Suite
-struct `Interval Discrete Tests` {
+struct `Discrete intervals preserve validated extents through translation and persistence` {
 
     @Test
     func `start and count form a half-open interval`() throws {
