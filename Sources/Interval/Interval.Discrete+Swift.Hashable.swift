@@ -2,7 +2,7 @@ internal import Advancement
 internal import Cardinal
 internal import Carrier
 internal import Distance
-public import Ordinal
+import Ordinal
 
 extension Interval.Discrete: Swift.Hashable {
 
