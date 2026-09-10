@@ -1,4 +1,3 @@
-# .github/metadata.yaml
 description: "Foundation-free descriptor vocabulary for an interval's endpoints: bound, boundary, and endpoint position."
 topics:
   - primitives
