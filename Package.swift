@@ -17,7 +17,15 @@ let package = Package(
         .library(name: "Interval Foundation Integration", targets: ["Interval Foundation Integration"]),
         .library(name: "Interval Test Support", targets: ["Interval Test Support"]),
     ],
+    traits: [
+        .trait(name: "Finite", description: "Finite integration"),
+
+        .trait(name: "Pair", description: "Pairing interval labels with payloads"),
+    ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-index.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-finite.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-pair.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-advancement.git",
             branch: "main"
@@ -47,6 +55,10 @@ let package = Package(
         .target(
             name: "Interval",
             dependencies: [
+                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Finite"])),
+                .product(name: "Index", package: "swift-index", condition: .when(traits: ["Finite"])),
+                .product(name: "Finite", package: "swift-finite", condition: .when(traits: ["Finite"])),
+                .product(name: "Pair", package: "swift-pair", condition: .when(traits: ["Pair"])),
                 .product(name: "Advancement", package: "swift-advancement"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Distance", package: "swift-distance"),
@@ -81,6 +93,19 @@ let package = Package(
                 .target(name: "Interval Foundation Integration"),
             ],
             path: "Tests/Interval Tests"
+        ),
+        .testTarget(
+            name: "Interval Finite Tests",
+            dependencies: [
+                .target(name: "Interval"),
+                .target(name: "Interval Test Support"),
+                .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Finite"])),
+                .product(name: "Finite", package: "swift-finite", condition: .when(traits: ["Finite"])),
+                .product(name: "Index", package: "swift-index", condition: .when(traits: ["Finite"])),
+                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["Finite"])),
+                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["Finite"])),
+            ],
+            path: "Tests/Interval Finite Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
