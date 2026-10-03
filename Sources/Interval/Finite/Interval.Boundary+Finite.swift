@@ -1,9 +1,7 @@
 #if Finite
 public import Cardinal
 public import Finite
-import Index
 public import Ordinal
-import Tagged
 
 extension Interval.Boundary: Finite.Enumerable {
 
