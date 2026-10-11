@@ -4,7 +4,7 @@ internal import Carrier
 internal import Distance
 public import Ordinal
 
-extension Swift.Range where Bound: Ordinal.`Protocol` {
+extension Swift::Range where Bound: Ordinal.`Protocol` {
 
 
     public init(_ interval: Interval.Discrete<Bound>) {

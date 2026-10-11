@@ -1,4 +1,4 @@
-extension Interval.Unit: Swift.Hashable {
+extension Interval.Unit: Swift::Hashable {
 
     @inlinable
     public func hash(into hasher: inout Hasher) {

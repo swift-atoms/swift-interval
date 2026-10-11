@@ -13,17 +13,19 @@ private typealias SlotCount = Tagged<Slot, Cardinal>
 private typealias SlotOffset = Tagged<Slot, Difference>
 
 private struct CodablePosition: Ordinal.`Protocol`, Codable, Comparable, Sendable {
-    typealias Domain = Never
-    typealias Count = Cardinal
-    typealias Offset = Difference
-
     let rawValue: UInt
-
-    var ordinal: Ordinal { Ordinal(rawValue) }
 
     init(_ ordinal: Ordinal) {
         self.rawValue = ordinal.rawValue
     }
+}
+
+extension CodablePosition {
+    typealias Domain = Never
+    typealias Count = Cardinal
+    typealias Offset = Difference
+
+    var ordinal: Ordinal { Ordinal(rawValue) }
 
     static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue < rhs.rawValue

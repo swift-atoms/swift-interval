@@ -5,7 +5,7 @@ internal import Distance
 import Ordinal
 
 #if !hasFeature(Embedded)
-extension Interval.Discrete: Swift.Codable where Position: Swift.Codable {
+extension Interval.Discrete: Swift::Codable where Position: Swift::Codable {
 
         private enum CodingKeys: String, CodingKey {
             case start

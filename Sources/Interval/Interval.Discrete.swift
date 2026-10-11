@@ -8,25 +8,11 @@ extension Interval {
 
 
     public struct Discrete<Position: Ordinal.`Protocol`> {
-
         public let start: Position
-
 
         public let end: Position
 
-
-        public var count: Position.Count {
-            Position.Count(
-                Cardinal(
-                    Distance.reporting(
-                        from: start.ordinal.rawValue,
-                        to: end.ordinal.rawValue
-                    ).value
-                )
-            )
-        }
-
-        public enum Error: Swift.Error, Hashable, Sendable {
+        public enum Error: Swift::Error, Hashable, Sendable {
             case reversed
             case overflow
         }
@@ -55,39 +41,6 @@ extension Interval {
             self.end = end
         }
 
-        public var isEmpty: Bool {
-            start.ordinal.rawValue == end.ordinal.rawValue
-        }
-
-        public func contains(_ position: Position) -> Bool {
-            let value = position.ordinal.rawValue
-            return value >= start.ordinal.rawValue && value < end.ordinal.rawValue
-        }
-
-        public func translated(
-            by offset: consuming Position.Offset
-        ) throws(Ordinal.Error) -> Self {
-            let translatedStart = try start + offset
-            let span = Distance.reporting(
-                from: start.ordinal.rawValue,
-                to: end.ordinal.rawValue
-            ).value
-            let translatedEnd: UInt
-            do {
-                translatedEnd = try Advancement.exact(
-                    translatedStart.ordinal.rawValue,
-                    by: span
-                )
-            } catch {
-                throw .overflow
-            }
-
-            return Self(
-                validatedStart: translatedStart,
-                end: Position(Ordinal(translatedEnd))
-            )
-        }
-
         private init(validatedStart start: Position, end: Position) {
             self.start = start
             self.end = end
@@ -95,24 +48,70 @@ extension Interval {
     }
 }
 
-extension Interval.Discrete: Swift.Sendable where Position: Swift.Sendable {}
+extension Interval.Discrete: Swift::Sendable where Position: Swift::Sendable {}
 
 extension Interval.Discrete where Position: Comparable {
 
 
 
-    public init(_ range: Swift.Range<Position>) throws(Error) {
+    public init(_ range: Swift::Range<Position>) throws(Error) {
         try self.init(start: range.lowerBound, end: range.upperBound)
     }
 
 
 
 
-    public var range: Swift.Range<Position> {
+    public var range: Swift::Range<Position> {
         precondition(
             start <= end,
             "Position Comparable order must agree with its ordinal order"
         )
         return start..<end
+    }
+}
+
+extension Interval.Discrete {
+    public var count: Position.Count {
+        Position.Count(
+            Cardinal(
+                Distance.reporting(
+                    from: start.ordinal.rawValue,
+                    to: end.ordinal.rawValue
+                ).value
+            )
+        )
+    }
+
+    public var isEmpty: Bool {
+        start.ordinal.rawValue == end.ordinal.rawValue
+    }
+
+    public func contains(_ position: Position) -> Bool {
+        let value = position.ordinal.rawValue
+        return value >= start.ordinal.rawValue && value < end.ordinal.rawValue
+    }
+
+    public func translated(
+        by offset: consuming Position.Offset
+    ) throws(Ordinal.Error) -> Self {
+        let translatedStart = try start + offset
+        let span = Distance.reporting(
+            from: start.ordinal.rawValue,
+            to: end.ordinal.rawValue
+        ).value
+        let translatedEnd: UInt
+        do {
+            translatedEnd = try Advancement.exact(
+                translatedStart.ordinal.rawValue,
+                by: span
+            )
+        } catch {
+            throw .overflow
+        }
+
+        return Self(
+            validatedStart: translatedStart,
+            end: Position(Ordinal(translatedEnd))
+        )
     }
 }

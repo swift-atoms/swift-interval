@@ -37,7 +37,7 @@ extension Interval.Unit {
     public var underlying: Scalar { _storage }
 }
 
-extension Interval.Unit: Swift.Sendable where Scalar: Swift.Sendable {}
+extension Interval.Unit: Swift::Sendable where Scalar: Swift::Sendable {}
 
 extension Interval.Unit {
 

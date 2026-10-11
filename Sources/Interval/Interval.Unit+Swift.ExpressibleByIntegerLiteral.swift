@@ -1,5 +1,5 @@
-extension Interval.Unit: Swift.ExpressibleByIntegerLiteral
-where Scalar: Swift.ExpressibleByIntegerLiteral {
+extension Interval.Unit: Swift::ExpressibleByIntegerLiteral
+where Scalar: Swift::ExpressibleByIntegerLiteral {
 
     public typealias IntegerLiteralType = Scalar.IntegerLiteralType
 

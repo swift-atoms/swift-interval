@@ -1,5 +1,5 @@
 #if !hasFeature(Embedded)
-extension Interval.Unit: Swift.Codable where Scalar: Swift.Codable {
+extension Interval.Unit: Swift::Codable where Scalar: Swift::Codable {
 
         public init(from decoder: any Decoder) throws {
             let container = try decoder.singleValueContainer()

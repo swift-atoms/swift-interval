@@ -4,7 +4,7 @@ internal import Carrier
 internal import Distance
 import Ordinal
 
-extension Interval.Discrete: Swift.Equatable {
+extension Interval.Discrete: Swift::Equatable {
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.start.ordinal.rawValue == rhs.start.ordinal.rawValue

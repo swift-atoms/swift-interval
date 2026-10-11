@@ -1,5 +1,5 @@
-extension Interval.Unit: Swift.ExpressibleByFloatLiteral
-where Scalar: Swift.ExpressibleByFloatLiteral {
+extension Interval.Unit: Swift::ExpressibleByFloatLiteral
+where Scalar: Swift::ExpressibleByFloatLiteral {
 
     public typealias FloatLiteralType = Scalar.FloatLiteralType
 

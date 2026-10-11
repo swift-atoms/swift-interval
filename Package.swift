@@ -89,7 +89,6 @@ let package = Package(
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .target(name: "Interval Test Support"),
-                .target(name: "Interval Foundation Integration"),
             ],
             path: "Tests/Interval Tests"
         ),
@@ -110,7 +109,7 @@ let package = Package(
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin].contains(target.type) {
+for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
     target.swiftSettings = (target.swiftSettings ?? []) + [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),

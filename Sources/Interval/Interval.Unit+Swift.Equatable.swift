@@ -1,4 +1,4 @@
-extension Interval.Unit: Swift.Equatable {
+extension Interval.Unit: Swift::Equatable {
 
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {
