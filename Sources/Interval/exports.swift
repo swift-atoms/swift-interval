@@ -4,5 +4,5 @@
 @_exported public import Ordinal
 
 #if Pair
-@_exported public import Pair
+    @_exported public import Pair
 #endif

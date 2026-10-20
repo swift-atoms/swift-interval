@@ -44,7 +44,8 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-ordinal.git",
-            branch: "main"),
+            branch: "main"
+        ),
         .package(
             url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
@@ -65,18 +66,18 @@ let package = Package(
             ],
             path: "Sources/Interval"
         ),
-        
+
         .target(
             name: "Interval Foundation Integration",
             dependencies: [
-                .target(name: "Interval"),
+                .target(name: "Interval")
             ],
             path: "Sources/Interval Foundation Integration"
         ),
         .target(
             name: "Interval Test Support",
             dependencies: [
-                .target(name: "Interval"),
+                .target(name: "Interval")
             ],
             path: "Tests/Support"
         ),
@@ -110,14 +111,15 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }

@@ -70,7 +70,8 @@ struct `Unit interval construction preserves its finite bounds` {
                 || unit * .one != unit
                 || unit * .zero != .zero
                 || unit.interpolated(to: .one, at: .zero) != unit
-                || unit.interpolated(to: .zero, at: .one) != .zero {
+                || unit.interpolated(to: .zero, at: .one) != .zero
+            {
                 violations.append(bits)
             }
         }
@@ -107,7 +108,9 @@ struct `Unit interval construction preserves its finite bounds` {
     func `Decoding rejects nonfinite values even when scalar decoding allows them`(value: String) throws {
         let decoder = JSONDecoder()
         decoder.nonConformingFloatDecodingStrategy = .convertFromString(
-            positiveInfinity: "Infinity", negativeInfinity: "-Infinity", nan: "NaN"
+            positiveInfinity: "Infinity",
+            negativeInfinity: "-Infinity",
+            nan: "NaN"
         )
         let data = try JSONEncoder().encode(value)
         #expect(throws: DecodingError.self) {

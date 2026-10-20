@@ -1,18 +1,18 @@
 #if Pair
-public import Pair
+    public import Pair
 
-extension Interval.Bound {
+    extension Interval.Bound {
 
-    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Interval.Bound, Payload>
-}
+        public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Interval.Bound, Payload>
+    }
 
-extension Interval.Boundary {
+    extension Interval.Boundary {
 
-    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Interval.Boundary, Payload>
-}
+        public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Interval.Boundary, Payload>
+    }
 
-extension Interval.Endpoint {
+    extension Interval.Endpoint {
 
-    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Interval.Endpoint, Payload>
-}
+        public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Interval.Endpoint, Payload>
+    }
 #endif

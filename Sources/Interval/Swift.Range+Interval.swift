@@ -6,7 +6,6 @@ public import Ordinal
 
 extension Swift::Range where Bound: Ordinal.`Protocol` {
 
-
     public init(_ interval: Interval.Discrete<Bound>) {
         precondition(
             interval.start <= interval.end,

@@ -1,2 +1,2 @@
-@_exported public import Interval
 import Foundation
+@_exported public import Interval

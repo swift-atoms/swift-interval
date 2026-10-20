@@ -41,5 +41,5 @@ extension Interval.Bound {
 }
 
 #if !hasFeature(Embedded)
-extension Interval.Bound: Swift::Codable {}
+    extension Interval.Bound: Swift::Codable {}
 #endif
