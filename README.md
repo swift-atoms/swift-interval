@@ -1,0 +1,14 @@
+# swift-interval
+
+Use this package when you need a validated interval value instead of a pair of loose numbers. Start from `Interval.Discrete<Position>` for a half-open run of ordinal positions (slots, indices, line numbers), possibly tagged to a domain so positions, counts and offsets from different domains cannot mix. Start from `Interval.Unit<Scalar>` for a floating-point fraction confined to the closed unit interval, such as a progress value, an interpolation parameter or an `Opacity<Scalar>`. Use `Interval.Bound`, `Interval.Boundary` and `Interval.Endpoint` when you only need to name which side of an interval, or whether a side is included, without holding an interval.
+
+## Laws
+
+- `Interval.Discrete<Position>` is half-open: it contains `start` and excludes `end`, so an interval with `start == end` is empty and contains nothing. An empty interval is valid at the greatest representable position.
+- Every rule on `Interval.Discrete<Position>` uses the ordinal order of `Position`, never its `Comparable` order: construction, `contains`, `count`, equality and hashing. Two intervals are equal exactly when their endpoints have the same ordinals, however they were built. `range` and the `Swift.Range` initializer trap if the `Comparable` order of `Position` disagrees with its ordinal order.
+- Building from endpoints fails as reversed when `end` precedes `start`. Building from a start and count fails as overflow when the end would lie past the greatest representable position. Decoding reports reversed endpoints as a data-corruption error rather than producing an interval.
+- Translating an `Interval.Discrete<Position>` moves both endpoints by the same offset and keeps `count`. A start that moves below zero or past the greatest position fails with the position's own underflow or overflow, and an end that moves past the greatest position fails as overflow.
+- An `Interval.Unit<Scalar>` always holds a finite value in [0, 1]; negative zero is accepted and kept. The failable initializer rejects every value outside that range, including NaN and the infinities, and decoding rejects the same values. `init(clamping:)` maps NaN to 0 and clamps every other value into [0, 1]. Float and integer literals and the unchecked initializer trap on an invalid value instead of clamping.
+- `complement`, `*` and `interpolated(to:at:)` clamp their result back into [0, 1]. `.one` is the identity of `*` and `.zero` absorbs it; interpolating at `.zero` returns the receiver and at `.one` returns the target. `complement` rounds, so it is not an exact involution: the complement of the complement of the smallest positive value is `.zero`.
+- `Interval.Unit<Scalar>` encodes as its bare scalar.
+- `opposite` (and prefix `!`) on `Interval.Bound`, `Interval.Boundary` and `Interval.Endpoint` swaps the two cases, so applying it twice returns the original. With the `Finite` trait, `.lower`, `.closed` and `.start` have ordinal 0 and the other case ordinal 1.
