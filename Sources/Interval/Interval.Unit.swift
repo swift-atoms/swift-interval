@@ -84,3 +84,86 @@ extension Interval.Unit {
 public typealias Opacity<Scalar: BinaryFloatingPoint> = Interval.Unit<Scalar>
 
 public typealias Alpha<Scalar: BinaryFloatingPoint> = Opacity<Scalar>
+
+#if !hasFeature(Embedded)
+    extension Interval.Unit: Swift::Codable where Scalar: Swift::Codable {
+
+        public init(from decoder: any Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            let value = try container.decode(Scalar.self)
+            guard let unit = Self(value) else {
+                throw DecodingError.dataCorrupted(
+                    DecodingError.Context(
+                        codingPath: decoder.codingPath,
+                        debugDescription:
+                            "Value \(value) out of bounds for Interval.Unit (expected [0, 1])"
+                    )
+                )
+            }
+            self = unit
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(_storage)
+        }
+    }
+#endif
+
+extension Interval.Unit: Swift::Comparable {
+
+    @inlinable
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs._storage < rhs._storage
+    }
+}
+
+extension Interval.Unit: Swift::Equatable {
+
+    @inlinable
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs._storage == rhs._storage
+    }
+}
+
+extension Interval.Unit: Swift::ExpressibleByFloatLiteral
+where Scalar: Swift::ExpressibleByFloatLiteral {
+
+    public typealias FloatLiteralType = Scalar.FloatLiteralType
+
+    @inlinable
+    public init(floatLiteral value: FloatLiteralType) {
+        let scalar = Scalar(floatLiteral: value)
+        precondition(
+            scalar.isFinite && scalar >= 0 && scalar <= 1,
+            "Float literal must be finite and in [0, 1]"
+        )
+
+        self._storage = scalar
+    }
+}
+
+extension Interval.Unit: Swift::ExpressibleByIntegerLiteral
+where Scalar: Swift::ExpressibleByIntegerLiteral {
+
+    public typealias IntegerLiteralType = Scalar.IntegerLiteralType
+
+    @inlinable
+    public init(integerLiteral value: IntegerLiteralType) {
+        let scalar = Scalar(integerLiteral: value)
+        precondition(
+            scalar >= 0 && scalar <= 1,
+            "Integer literal must be 0 or 1"
+        )
+
+        self._storage = scalar
+    }
+}
+
+extension Interval.Unit: Swift::Hashable {
+
+    @inlinable
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(_storage)
+    }
+}
