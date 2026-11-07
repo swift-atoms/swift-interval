@@ -33,7 +33,7 @@ struct `Unit interval construction preserves its finite bounds` {
     @Test
     func `Every binary sixteen value follows the same checked and clamping contracts`() {
         var violations: [UInt16] = []
-        for bits in UInt16.min...UInt16.max {
+        (UInt16.min...UInt16.max).forEach { bits in
             let scalar = Float16(bitPattern: bits)
             let accepted = scalar.isFinite && scalar >= 0 && scalar <= 1
             let checked = Interval.Unit<Float16>(scalar)
