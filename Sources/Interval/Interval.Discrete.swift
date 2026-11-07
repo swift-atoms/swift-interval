@@ -109,19 +109,3 @@ extension Interval.Discrete {
         )
     }
 }
-
-extension Interval.Discrete: Swift::Equatable {
-
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.start.ordinal.rawValue == rhs.start.ordinal.rawValue
-            && lhs.end.ordinal.rawValue == rhs.end.ordinal.rawValue
-    }
-}
-
-extension Interval.Discrete: Swift::Hashable {
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(start.ordinal.rawValue)
-        hasher.combine(end.ordinal.rawValue)
-    }
-}
