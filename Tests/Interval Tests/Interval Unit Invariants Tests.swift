@@ -59,8 +59,8 @@ extension `Interval Unit Invariants Tests` {
         @Test
         func `Every valid binary sixteen value remains bounded under interval operations`() {
             var violations: [UInt16] = []
-            for bits in UInt16.min...UInt16.max {
-                guard let unit = Interval.Unit<Float16>(Float16(bitPattern: bits)) else { continue }
+            (UInt16.min...UInt16.max).forEach { bits in
+                guard let unit = Interval.Unit<Float16>(Float16(bitPattern: bits)) else { return }
                 let results = [
                     unit.complement,
                     unit * unit,
