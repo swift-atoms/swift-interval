@@ -2,9 +2,9 @@
     import Interval
     import Testing
 
-enum `Interval Pair Tests` {}
+    enum `Interval Pair Tests` {}
 
-extension `Interval Pair Tests` {
+    extension `Interval Pair Tests` {
         @Suite
         struct `Interval labels compose with payloads through Pair` {
             @Test
@@ -91,5 +91,5 @@ extension `Interval Pair Tests` {
                 #expect(third == nil)
             }
         }
-}
+    }
 #endif
