@@ -5,10 +5,16 @@ internal import Distance
 public import Ordinal
 
 extension Interval {
+
     public struct Discrete<Position: Ordinal.`Protocol`> {
         public let start: Position
 
         public let end: Position
+
+        public enum Error: Swift::Error, Hashable, Sendable {
+            case reversed
+            case overflow
+        }
 
         public init(start: Position, count: Position.Count) throws(Error) {
             let end: UInt
@@ -41,16 +47,10 @@ extension Interval {
     }
 }
 
-extension Interval.Discrete {
-    public enum Error: Swift::Error, Hashable, Sendable {
-        case reversed
-        case overflow
-    }
-}
-
 extension Interval.Discrete: Swift::Sendable where Position: Swift::Sendable {}
 
 extension Interval.Discrete where Position: Comparable {
+
     public init(_ range: Swift::Range<Position>) throws(Error) {
         try self.init(start: range.lowerBound, end: range.upperBound)
     }
@@ -107,19 +107,5 @@ extension Interval.Discrete {
             validatedStart: translatedStart,
             end: Position(Ordinal(translatedEnd))
         )
-    }
-}
-
-extension Interval.Discrete: Swift::Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.start.ordinal.rawValue == rhs.start.ordinal.rawValue
-            && lhs.end.ordinal.rawValue == rhs.end.ordinal.rawValue
-    }
-}
-
-extension Interval.Discrete: Swift::Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(start.ordinal.rawValue)
-        hasher.combine(end.ordinal.rawValue)
     }
 }
