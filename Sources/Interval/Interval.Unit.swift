@@ -33,6 +33,16 @@ extension Interval {
 
 extension Interval.Unit {
 
+    /// The progress of `value` through `range`, clamped into the unit interval: `range.progress(of: value)`
+    /// taken by `init(clamping:)`, so values below the range give 0, values above it 1, and NaN 0.
+    @inlinable
+    public init(progress value: Scalar, through range: ClosedRange<Scalar>) {
+        self.init(clamping: range.progress(of: value))
+    }
+}
+
+extension Interval.Unit {
+
     @inlinable
     public var underlying: Scalar { _storage }
 }
