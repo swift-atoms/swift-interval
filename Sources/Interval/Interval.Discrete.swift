@@ -1,7 +1,7 @@
 internal import Advancement
 internal import Cardinal
 internal import Carrier
-internal import Distance
+internal import Subtraction
 public import Ordinal
 
 extension Interval {
@@ -84,10 +84,7 @@ extension Interval.Discrete {
     public var count: Position.Count {
         Position.Count(
             Cardinal(
-                Distance.reporting(
-                    from: start.ordinal.rawValue,
-                    to: end.ordinal.rawValue
-                ).value
+                Subtraction.reporting(end.ordinal.rawValue, start.ordinal.rawValue).value
             )
         )
     }
@@ -105,10 +102,7 @@ extension Interval.Discrete {
         by offset: consuming Position.Offset
     ) throws(Ordinal.Error) -> Self {
         let translatedStart = try start + offset
-        let span = Distance.reporting(
-            from: start.ordinal.rawValue,
-            to: end.ordinal.rawValue
-        ).value
+        let span = Subtraction.reporting(end.ordinal.rawValue, start.ordinal.rawValue).value
         let translatedEnd: UInt
         do {
             translatedEnd = try Advancement.exact(

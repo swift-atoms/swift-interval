@@ -39,7 +39,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-distance.git",
+            url: "https://github.com/swift-atoms/swift-subtraction.git",
             branch: "main"
         ),
         .package(
@@ -61,7 +61,7 @@ let package = Package(
                 .product(name: "Pair", package: "swift-pair", condition: .when(traits: ["Pair"])),
                 .product(name: "Advancement", package: "swift-advancement"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Distance", package: "swift-distance"),
+                .product(name: "Subtraction", package: "swift-subtraction"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
             ],
             path: "Sources/Interval"

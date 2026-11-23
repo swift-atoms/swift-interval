@@ -1,7 +1,7 @@
 internal import Advancement
 internal import Cardinal
 internal import Carrier
-internal import Distance
+internal import Subtraction
 public import Ordinal
 
 extension Swift::Range where Bound: Ordinal.`Protocol` {

@@ -1,7 +1,7 @@
 internal import Advancement
 internal import Cardinal
 internal import Carrier
-internal import Distance
+internal import Subtraction
 import Ordinal
 
 #if !hasFeature(Embedded)
