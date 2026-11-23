@@ -1,8 +1,8 @@
 internal import Advancement
 internal import Cardinal
 internal import Carrier
-internal import Subtraction
 import Ordinal
+internal import Subtraction
 
 #if !hasFeature(Embedded)
     extension Interval.Discrete: Swift::Codable where Position: Swift::Codable {
